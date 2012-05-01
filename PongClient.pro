@@ -11,8 +11,12 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        pongclient.cpp
+        pongclient.cpp \
+    palette.cpp \
+    balle.cpp
 
-HEADERS  += pongclient.h
+HEADERS  += pongclient.h \
+    palette.h \
+    balle.h
 
 FORMS    += pongclient.ui
