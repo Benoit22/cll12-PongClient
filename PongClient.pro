@@ -5,6 +5,8 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += network
+
 
 TARGET = PongClient
 TEMPLATE = app

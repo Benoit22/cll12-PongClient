@@ -1,9 +1,9 @@
 #ifndef PONGCLIENT_H
 #define PONGCLIENT_H
-
 #include <QMainWindow>
 #include <QWidget>
     #include <QKeyEvent>
+#include <QTcpSocket>
 
 namespace Ui {
 class PongClient;
@@ -20,6 +20,9 @@ public:
 protected:
     void paintEvent(QPaintEvent *);
     void keyPressEvent(QKeyEvent *);
+private slots:
+    void on_btnConnectServer_clicked();
+
 private:
     Ui::PongClient *ui;
     int m_x;
@@ -34,6 +37,8 @@ private:
     int m_y2;
     int m_w2;
     int m_h2;
+    QTcpSocket m_socket;
+    int m_joueur;
 };
 
 #endif // PONGCLIENT_H

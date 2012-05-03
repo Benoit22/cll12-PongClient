@@ -9,6 +9,7 @@ PongClient::PongClient(QWidget *parent) :
 {
     this->grabKeyboard();
     ui->setupUi(this);
+    m_joueur = 0;
     m_x = 10;
     m_y = 10;
     update();
@@ -30,6 +31,7 @@ void PongClient::keyPressEvent ( QKeyEvent * event )
             case Qt::Key_Down:
                 if(m_y <= 245)
                     m_y += 5;
+
                 update();
                 break;
             case Qt::Key_Up:
@@ -44,4 +46,17 @@ void PongClient::keyPressEvent ( QKeyEvent * event )
 PongClient::~PongClient()
 {
     delete ui;
+}
+
+void PongClient::on_btnConnectServer_clicked()
+{
+    QByteArray baReception;
+    m_socket.connectToHost(ui->txtIpServeur->text(),60123, QIODevice::ReadWrite);
+    m_socket.write("#");
+    while (m_socket.waitForReadyRead(1000)) // Attente des données pendant 0.1 sec maximum
+    {
+        baReception.append(m_socket.read(m_socket.bytesAvailable()));
+        m_joueur = baReception.toInt(0,10);
+    }
+
 }

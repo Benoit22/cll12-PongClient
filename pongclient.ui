@@ -27,6 +27,19 @@
      <string>Démarrer</string>
     </property>
    </widget>
+   <widget class="QLineEdit" name="txtIpServeur">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>390</y>
+      <width>113</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>172.16.18.1</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
