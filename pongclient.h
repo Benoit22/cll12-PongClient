@@ -2,8 +2,9 @@
 #define PONGCLIENT_H
 #include <QMainWindow>
 #include <QWidget>
-    #include <QKeyEvent>
+#include <QKeyEvent>
 #include <QTcpSocket>
+#include <QtGui>
 
 namespace Ui {
 class PongClient;
@@ -25,20 +26,15 @@ private slots:
 
 private:
     Ui::PongClient *ui;
-    int m_x;
-    int m_y;
-    int m_w;
-    int m_h;
-    int m_x1;
-    int m_y1;
-    int m_w1;
-    int m_h1;
-    int m_x2;
-    int m_y2;
-    int m_w2;
-    int m_h2;
+    int m_x;//Joueur1
+    int m_y;//Joueur1
+    int m_x1;//Joueur2
+    int m_y1;//Joueur2
+    int m_x2;//Balle
+    int m_y2;//Balle
     QTcpSocket m_socket;
     int m_joueur;
+    //QByteArray
 };
 
 #endif // PONGCLIENT_H
