@@ -11,12 +11,14 @@ PongClient::PongClient(QWidget *parent) :
     ui->setupUi(this);
     m_joueur = 0;
     m_socket.connectToHost(ui->txtIpServeur->text(),60123, QIODevice::ReadWrite);
-    m_x = 10;
+    m_x = 40;
     m_y = 10;
-    m_x1 = 0;
-    m_x2 = 0;
+    m_x1 = 780;
+    m_y1 = 10;
     m_x2 = 100;
     m_y2 = 200;
+    //int x = this->width();
+    //m_x2 = x -20;
     update();
 }
 void PongClient::paintEvent(QPaintEvent *)
@@ -25,106 +27,67 @@ void PongClient::paintEvent(QPaintEvent *)
     painter.setBrush(Qt::blue);
     painter.setFont(QFont("Arial", 30));
     painter.drawRect(m_x,m_y,10,40);
+      painter.drawRect(m_x1,m_y1,10,40);
     painter.drawRect(m_x2,m_y2,10,10);
 }
 
 void PongClient::keyPressEvent ( QKeyEvent * event )
 {
+    QString trame;
+    QByteArray baEnvoye;
+    switch (event->key())
     {
-        switch (event->key())
-        {
-            case Qt::Key_Down:
-                if(m_y <= 245 && m_joueur=1)
-                {
-                    m_y += 5;
-                    QString trame;
-                    trame = QString::number(m_x2);
-                    trame += ",";
-                    trame += QString::number(m_y2);
-                    trame += ".";
-                    trame = QString::number(m_x);
-                    trame += ",";
-                    trame += QString::number(m_y);
-                    trame += ".";
-                    trame = QString::number(m_x1);
-                    trame += ",";
-                    trame += QString::number(m_y1);
-                    trame += ".";
-                    trame = QString::number(10);
-                    trame += ",";
-                    trame += QString::number(14);
+    case Qt::Key_Down:
+        if(m_y <= 245 && m_joueur == 1)
+            m_y += 5;
+        else
+            if(m_y1 <= 245 && m_joueur == 2)
+                m_y1 += 5;
+        trame = QString::number(m_x2);
+        trame += ".";
+        trame += QString::number(m_y2);
+        trame += ".";
+        trame = QString::number(m_x);
+        trame += ".";
+        trame += QString::number(m_y);
+        trame += ".";
+        trame = QString::number(m_x1);
+        trame += ".";
+        trame += QString::number(m_y1);
+        trame += ".";
+        trame = QString::number(10);
+        trame += ".";
+        trame += QString::number(14);
+        baEnvoye.append(trame);
+        m_socket.write(baEnvoye);
+        update();
+        break;
 
-                    m_socket.write(trame);
-                }
-                else
-                {
-                    m_y1 += 5;
-                    QString trame;
-                    trame = QString::number(m_x2);
-                    trame += ",";
-                    trame += QString::number(m_y2);
-                    trame += ".";
-                    trame = QString::number(m_x);
-                    trame += ",";
-                    trame += QString::number(m_y);
-                    trame += ".";
-                    trame = QString::number(m_x1);
-                    trame += ",";
-                    trame += QString::number(m_y1);
-                    trame += ".";
-                    trame = QString::number(10);
-                    trame += ",";
-                    trame += QString::number(14);
-                    m_socket.write(trame);
-                }
-                update();
-                break;
-            case Qt::Key_Up:
-                if(m_y >= 5 && m_joueur=1)
-                {
-                    m_y -= 5;
-                    QString trame;
-                    trame = QString::number(m_x2);
-                    trame += ",";
-                    trame += QString::number(m_y2);
-                    trame += ".";
-                    trame = QString::number(m_x);
-                    trame += ",";
-                    trame += QString::number(m_y);
-                    trame += ".";
-                    trame = QString::number(m_x1);
-                    trame += ",";
-                    trame += QString::number(m_y1);
-                    trame += ".";
-                    trame = QString::number(10);
-                    trame += ",";
-                    trame += QString::number(14);
-                    m_socket.write(trame);
-                }
-                else
-                {
-                    m_y1 -= 5;
-                    QString trame;
-                    trame = QString::number(m_x2);
-                    trame += ",";
-                    trame += QString::number(m_y2);
-                    trame += ".";
-                    trame = QString::number(m_x);
-                    trame += ",";
-                    trame += QString::number(m_y);
-                    trame += ".";
-                    trame = QString::number(m_x1);
-                    trame += ",";
-                    trame += QString::number(m_y1);
-                    trame += ".";
-                    trame = QString::number(10);
-                    trame += ",";
-                    trame += QString::number(14);
-                    m_socket.write(trame);
-                }
-                update();
-                break;
-        }
+    case Qt::Key_Up:
+        if(m_y >= 5 && m_joueur == 1)
+            m_y -= 5;
+        else
+            if(m_y1 >= 5 && m_joueur == 2)
+                m_y1 -= 5;
+        trame = QString::number(m_x2);
+        trame += ".";
+        trame += QString::number(m_y2);
+        trame += ".";
+        trame = QString::number(m_x);
+        trame += ".";
+        trame += QString::number(m_y);
+        trame += ".";
+        trame = QString::number(m_x1);
+        trame += ".";
+        trame += QString::number(m_y1);
+        trame += ".";
+        trame = QString::number(10);
+        trame += ".";
+        trame += QString::number(14);
+        baEnvoye.append(trame);
+        m_socket.write(baEnvoye);
+        update();
+        break;
     }
 }
 
@@ -155,6 +118,8 @@ void PongClient::on_btnConnectServer_clicked()
                 m_joueur = baInfo.toInt(0,10);
                 break;
             case 1:
+                baInfo.append(m_socket.read(m_socket.bytesAvailable()));
+            case 2:
                 baInfo.append(m_socket.read(m_socket.bytesAvailable()));
         }
     }
