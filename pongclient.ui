@@ -30,14 +30,50 @@
    <widget class="QLineEdit" name="txtIpServeur">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>390</y>
+      <x>30</x>
+      <y>360</y>
       <width>113</width>
       <height>21</height>
      </rect>
     </property>
     <property name="text">
      <string>172.16.18.1</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblScoreJ1">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>10</y>
+      <width>271</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>72</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblScoreJ2">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>10</y>
+      <width>271</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>72</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>

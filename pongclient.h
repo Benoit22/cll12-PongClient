@@ -21,6 +21,9 @@ public:
 protected:
     void paintEvent(QPaintEvent *);
     void keyPressEvent(QKeyEvent *);
+
+signals:
+    void siInfos(QByteArray);
 private slots:
     void on_btnConnectServer_clicked();
 
@@ -32,6 +35,9 @@ private:
     int m_y1;//Joueur2
     int m_x2;//Balle
     int m_y2;//Balle
+    int m_scoreJ1;
+    int m_scoreJ2;
+    bool m_Pret;
     QTcpSocket m_socket;
     int m_joueur;
     //QByteArray
