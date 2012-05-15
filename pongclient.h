@@ -1,5 +1,6 @@
 #ifndef PONGCLIENT_H
 #define PONGCLIENT_H
+#include "thclient.h"
 #include <QMainWindow>
 #include <QWidget>
 #include <QKeyEvent>
@@ -24,21 +25,26 @@ protected:
 
 signals:
     void siInfos(QByteArray);
+    void siThread();
 private slots:
     void on_btnConnectServer_clicked();
+    void slMAJjeux(QByteArray);
 
 private:
     Ui::PongClient *ui;
-    int m_x;//Joueur1
-    int m_y;//Joueur1
-    int m_x1;//Joueur2
-    int m_y1;//Joueur2
-    int m_x2;//Balle
-    int m_y2;//Balle
+    int m_Ballex;
+    int m_Balley;
+    int m_Joueur1x;
+    int m_Joueur1y;
+    int m_Joueur2x;
+    int m_Joueur2y;
     int m_scoreJ1;
+    int m_Service;
     int m_scoreJ2;
     bool m_Pret;
-    QTcpSocket m_socket;
+    bool m_Gagnant;
+    int m_JoueurService;
+    ThClient *m_Thcli;
     int m_joueur;
     //QByteArray
 };

@@ -13,8 +13,10 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        pongclient.cpp
+        pongclient.cpp \
+    thclient.cpp
 
-HEADERS  += pongclient.h
+HEADERS  += pongclient.h \
+    thclient.h
 
 FORMS    += pongclient.ui

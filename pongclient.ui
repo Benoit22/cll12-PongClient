@@ -39,6 +39,9 @@
     <property name="text">
      <string>172.16.18.1</string>
     </property>
+    <property name="readOnly">
+     <bool>false</bool>
+    </property>
    </widget>
    <widget class="QLabel" name="lblScoreJ1">
     <property name="geometry">
