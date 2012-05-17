@@ -10,12 +10,14 @@ void ThClient::run()
 {
     m_sockClient.connectToHost(m_IpAdresse, 60123);
     m_sockClient.waitForConnected();
+    //QByteArray a;
+    //a.append("#.100.100.40.10.780.0.10.1");
     m_sockClient.write("&");
     while(m_sockClient.waitForReadyRead(100000))
     {
         m_baRecevoir.append(m_sockClient.read(m_sockClient.bytesAvailable())); // Lecture des données
         emit(siMAJjeux(m_baRecevoir));// Envoi des données pour la mise à jour de la fenêtre principale
-        ThClient::sleep(25);
+        ThClient::sleep(100);
         m_sockClient.write(m_baRecevoir);
     }
     m_sockClient.close();

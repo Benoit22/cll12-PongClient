@@ -12,8 +12,8 @@ PongClient::PongClient(QWidget *parent) :
     m_joueur = 0;
     m_Gagnant = false;
     m_Pret = false;
+    /*
     m_scoreJ1 =2;
-   /*
     m_Joueur1x = 40;
     m_Joueur1y = 10;
     m_Joueur2x = 780;
@@ -63,7 +63,7 @@ void PongClient::paintEvent(QPaintEvent *)
 void PongClient::keyPressEvent ( QKeyEvent * event )
 {
     QByteArray baEnvoye;
-    if(m_Gagnant = false)
+    if(m_Gagnant == false)
     {
         switch(event->key())
         {
@@ -115,10 +115,18 @@ void PongClient::keyPressEvent ( QKeyEvent * event )
             if(m_Service == 1 && m_joueur == 1)
             {
                 m_Pret = true;
+                baEnvoye.append("#.");
+                baEnvoye += QByteArray::number(m_Joueur1x);
+                baEnvoye.append(".");
+                baEnvoye += QByteArray::number(m_Joueur1y);
             }
             if(m_Service == 2 && m_joueur == 2)
             {
                 m_Pret = true;
+                baEnvoye.append("#.");
+                baEnvoye += QByteArray::number(m_Joueur2x);
+                baEnvoye.append(".");
+                baEnvoye += QByteArray::number(m_Joueur2y);
             }
             break;
         }
@@ -166,7 +174,7 @@ void PongClient::slMAJjeux(QByteArray ba)
             }
             update();
             break;
-         case '$'://trame de service
+         case '%'://trame de service
             m_Pret = false;
             m_Ballex = Point.at(1).toInt();
             if(m_Ballex < 100)
@@ -174,7 +182,7 @@ void PongClient::slMAJjeux(QByteArray ba)
             else
                 m_Service = 2;
             break;
-         case '%'://Trame de gagnant
+         case '$'://Trame de gagnant
             m_Gagnant = true;
             m_scoreJ1 = Point.at(7).toInt();
             m_scoreJ2 = Point.at(8).toInt();
@@ -182,20 +190,21 @@ void PongClient::slMAJjeux(QByteArray ba)
             ui->lblScoreJ2->setText(QString::number(m_scoreJ2));
             break;
          case '&'://Trame de départ
-            m_joueur = ba.right(1).toInt(0,10);
             m_Pret = true;
-            if(m_joueur == 1)
-            {
-                m_Joueur1x = 40;
-                m_Joueur1y = 10;
-                update();
-            }
-            else
-            {
-                m_Joueur2x = 780;
-                m_Joueur2y = 10;
-                update();
-            }
+            m_Ballex = Point.at(1).toInt();
+            m_Balley = Point.at(2).toInt();
+            m_Joueur1x = Point.at(3).toInt();
+            m_Joueur1y = Point.at(4).toInt();
+            m_Joueur2x = Point.at(5).toInt();
+            m_Joueur2y = Point.at(6).toInt();
+            m_scoreJ1 = Point.at(7).toInt();
+            m_scoreJ2 = Point.at(8).toInt();
+            ui->lblScoreJ1->setText(QString::number(m_scoreJ1));
+            ui->lblScoreJ2->setText(QString::number(m_scoreJ2));
+            update();
+            break;
+         default :
+            m_joueur = ba.toInt(0,10);
             break;
     }
 }
