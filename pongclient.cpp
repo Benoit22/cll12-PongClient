@@ -35,22 +35,29 @@ PongClient::PongClient(QWidget *parent) :
     baTest += QByteArray::number(1);
     baTest += QByteArray::number(2);
     */
+    m_Ballex = -1;
     ui->lblScoreJ1->backgroundRole();
     ui->lblScoreJ2->backgroundRole();
     update();
 }
 void PongClient::paintEvent(QPaintEvent *)
 {
-    if(m_joueur != 0)
+    QPainter painter(this);
+    painter.setBrush(Qt::blue);
+    painter.setPen(Qt::blue);
+    painter.setFont(QFont("Arial", 30));
+    if(m_joueur != 0 && m_Ballex == -1)
     {
-        QPainter painter(this);
-        painter.setBrush(Qt::blue);
-        painter.setPen(Qt::blue);
-        painter.setFont(QFont("Arial", 30));
         painter.drawRect(m_Joueur1x,m_Joueur1y,10,40);
         painter.drawRect(m_Joueur2x,m_Joueur2y,10,40);
-        painter.drawRect(m_Ballex,m_Balley,10,10);
     }
+    else
+        if(m_joueur != 0 && m_Ballex != -1)
+        {
+            painter.drawRect(m_Joueur1x,m_Joueur1y,10,40);
+            painter.drawRect(m_Joueur2x,m_Joueur2y,10,40);
+            painter.drawRect(m_Ballex,m_Balley,10,10);
+        }
 }
 
 void PongClient::keyPressEvent ( QKeyEvent * event )
