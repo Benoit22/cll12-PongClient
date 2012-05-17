@@ -13,8 +13,7 @@ PongClient::PongClient(QWidget *parent) :
     m_Gagnant = false;
     m_Pret = false;
     m_scoreJ1 =2;
-    //m_socket.connectToHost(ui->txtIpServeur->text(),60123, QIODevice::ReadWrite);
-    /*
+   /*
     m_Joueur1x = 40;
     m_Joueur1y = 10;
     m_Joueur2x = 780;
@@ -106,11 +105,11 @@ void PongClient::keyPressEvent ( QKeyEvent * event )
             break;
 
         case Qt::Key_Space:
-            if(m_JoueurService == 1 && m_joueur == 1)
+            if(m_Service == 1 && m_joueur == 1)
             {
                 m_Pret = true;
             }
-            if(m_JoueurService == 2 && m_joueur == 2)
+            if(m_Service == 2 && m_joueur == 2)
             {
                 m_Pret = true;
             }
@@ -127,10 +126,8 @@ PongClient::~PongClient()
 void PongClient::on_btnConnectServer_clicked()
 {
     m_Thcli = new ThClient(ui->txtIpServeur->text());
-    //connect(m_Thcli,SIGNAL(siMAJjeux(QByteArray)),this,SLOT(slMAJjeux(QByteArray)));
-    //connect(this,SIGNAL(siInfos(QByteArray)),m_Thcli,SLOT(slInfo(QByteArray)));
-    //connect(this,SIGNAL(siThread()),m_Thcli,SLOT(run()));
-    //emit(siThread());
+    connect(m_Thcli,SIGNAL(siMAJjeux(QByteArray)),this,SLOT(slMAJjeux(QByteArray)));
+    connect(this,SIGNAL(siInfos(QByteArray)),m_Thcli,SLOT(slInfo(QByteArray)));
     m_Thcli->start();
 }
 void PongClient::slMAJjeux(QByteArray ba)

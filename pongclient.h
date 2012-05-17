@@ -43,7 +43,6 @@ private:
     int m_scoreJ2;
     bool m_Pret;
     bool m_Gagnant;
-    int m_JoueurService;
     ThClient *m_Thcli;
     int m_joueur;
     //QByteArray

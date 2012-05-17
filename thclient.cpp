@@ -6,7 +6,6 @@ ThClient::ThClient(QString Adresse)
     m_IpAdresse = Adresse;
 }
 
-
 void ThClient::run()
 {
     m_sockClient.connectToHost(m_IpAdresse, 60123);
@@ -19,7 +18,9 @@ void ThClient::run()
         ThClient::sleep(25);
         m_sockClient.write(m_baRecevoir);
     }
+    m_sockClient.close();
 }
+
 void ThClient::slInfo(QByteArray ba)
 {
     m_baRecevoir= ba;
