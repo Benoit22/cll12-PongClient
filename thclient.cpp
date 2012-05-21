@@ -17,15 +17,20 @@ void ThClient::run()
     {
         m_baRecevoir.append(m_sockClient.read(m_sockClient.bytesAvailable())); // Lecture des données
         emit(siMAJjeux(m_baRecevoir));// Envoi des données pour la mise à jour de la fenêtre principale
-        ThClient::sleep(1);
-        m_sockClient.write(m_baRecevoir);
+        ThClient::sleep(10);
+        //m_sockClient.write(m_baRecevoir);
+        m_sockClient.write(m_baTx);
         m_baRecevoir.clear();
     }
-    m_sockClient.disconnectFromHost();
-    m_sockClient.close();
+    m_sockClient.disconnectFromHost();  //socket ferme trop tot
+    m_sockClient.close();       //il faut le garder ouvert!
 }
 
 void ThClient::slInfo(QByteArray ba)
 {
-    m_baRecevoir= ba;
+    /*
+    m_baRecevoir= ba;   //cette trame est ÉCRASÉE dans le run
+    //il faut une autre: batx
+    */
+    m_baTx =ba;
 }

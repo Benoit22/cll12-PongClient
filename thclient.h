@@ -17,7 +17,8 @@ private slots:
     void slInfo(QByteArray);
 private:
     QString m_IpAdresse;
-    QByteArray m_baRecevoir;
+    QByteArray m_baRecevoir;        //trame pour recevoir
+    QByteArray m_baTx;              //trame pour envoyer
     QTcpSocket m_sockClient;
 };
 

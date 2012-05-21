@@ -122,6 +122,7 @@ void PongClient::keyPressEvent ( QKeyEvent * event )
                 baEnvoye.append(".");
                 baEnvoye += QByteArray::number(m_Joueur1y);
             }
+            break;
             if(m_Service == 2 && m_joueur == 2)
             {
                 m_Pret = true;
@@ -132,7 +133,7 @@ void PongClient::keyPressEvent ( QKeyEvent * event )
             }
             break;
         }
-    }
+    }emit(siInfos(baEnvoye));
 }
 
 PongClient::~PongClient()
