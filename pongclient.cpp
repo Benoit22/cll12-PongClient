@@ -9,6 +9,8 @@ PongClient::PongClient(QWidget *parent) :
 {
     this->grabKeyboard();
     ui->setupUi(this);
+
+    ui->txtIpServeur->setText("127.0.0.1");
     m_joueur = 0;
     m_Gagnant = false;
     m_Pret = false;

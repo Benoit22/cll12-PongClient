@@ -17,9 +17,11 @@ void ThClient::run()
     {
         m_baRecevoir.append(m_sockClient.read(m_sockClient.bytesAvailable())); // Lecture des données
         emit(siMAJjeux(m_baRecevoir));// Envoi des données pour la mise à jour de la fenêtre principale
-        ThClient::sleep(100);
+        ThClient::sleep(1);
         m_sockClient.write(m_baRecevoir);
+        m_baRecevoir.clear();
     }
+    m_sockClient.disconnectFromHost();
     m_sockClient.close();
 }
 
